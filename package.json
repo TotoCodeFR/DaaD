@@ -1,7 +1,7 @@
 {
-  "name": "dibcord",
-  "version": "1.0.5",
-  "description": "A library for using Discord as a database.",
+  "name": "daad",
+  "version": "1.0.0",
+  "description": "Discord-as-a-database",
   "license": "AGPL-3.0-or-later",
   "author": {
     "name": "TotoCodeFR",
@@ -21,12 +21,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TotoCodeFR/dibcord.git"
+    "url": "git+https://github.com/TotoCodeFR/DaaD.git"
   },
   "bugs": {
-    "url": "https://github.com/TotoCodeFR/dibcord/issues"
+    "url": "https://github.com/TotoCodeFR/DaaD/issues"
   },
-  "homepage": "https://github.com/TotoCodeFR/dibcord#readme",
+  "homepage": "https://github.com/TotoCodeFR/DaaD#readme",
   "engines": {
     "node": ">=16.0.0"
   },

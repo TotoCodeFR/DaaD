@@ -1,6 +1,6 @@
-# Dibcord
+# DaaD
 
-A library for using Discord as a database.
+Discord-as-a-Database
 
 ## Features
 
@@ -15,13 +15,13 @@ A library for using Discord as a database.
 ## Installation
 
 ```bash
-npm install dibcord
+npm install daad
 ```
 
 ## Quick Start
 
 ```javascript
-import { Bot, ChannelTable } from 'dibcord';
+import { Bot, ChannelTable } from 'daad';
 
 // Initialize the bot
 const bot = new Bot('YOUR_BOT_TOKEN', 'YOUR_GUILD_ID');
@@ -73,12 +73,12 @@ await usersTable.delete('user123');
 
 ### Bot Class
 
-#### `new Bot(bot_token, guild_id, category_name = 'Dibcord')`
+#### `new Bot(bot_token, guild_id, category_name = 'DaaD')`
 Creates a new bot instance.
 
 - `bot_token` (string): Your Discord bot token
 - `guild_id` (string): The Discord server ID where tables will be created
-- `category_name` (string, optional): The name of the category to store table channels in. Defaults to `'Dibcord'`.
+- `category_name` (string, optional): The name of the category to store table channels in. Defaults to `'DaaD'`.
 
 #### `bot.link_table(table)`
 #### `bot.linkTable(table)`
@@ -139,9 +139,9 @@ Deletes a record from the table.
 
 ## How It Works
 
-Dibcord uses Discord channels as database tables:
+DaaD uses Discord channels as database tables:
 
-- Each table becomes a Discord channel under a "Dibcord" or custom category
+- Each table becomes a Discord channel under a "DaaD" or custom category
 - Records are stored as Discord messages with embedded JSON data
 - Large records are automatically chunked across multiple messages
 - Messages are linked together using footer references for data reconstruction
