@@ -103,7 +103,7 @@ class ChannelTable {
         // Post chunks in reverse order to create the linked list
         for (let i = chunks.length - 1; i >= 0; i--) {
             const embed = {
-                description: chunks[i],
+                description: "```json\n" + chunks[i] + "\n```",
                 footer: nextMessageId ? { text: `next_chunk_id:${nextMessageId}` } : undefined,
             };
 
@@ -150,7 +150,7 @@ class ChannelTable {
             const embed = currentMessage.embeds[0];
             if (!embed) break; // Malformed record
 
-            jsonString += embed.description;
+            jsonString += embed.description.replace(/^```json\n|```$/g, '');
 
             const nextChunkId = embed.footer?.text.startsWith('next_chunk_id:')
                 ? embed.footer.text.substring('next_chunk_id:'.length)
@@ -227,7 +227,7 @@ class ChannelTable {
             const embed = currentMessage.embeds[0];
             if (!embed) break;
 
-            jsonString += embed.description;
+            jsonString += embed.description.replace(/^```json\n|```$/g, '');
 
             const nextChunkId = embed.footer?.text.startsWith('next_chunk_id:') ?
                 embed.footer.text.substring('next_chunk_id:'.length) :
