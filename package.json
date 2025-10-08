@@ -1,0 +1,44 @@
+{
+  "name": "dibcord",
+  "version": "1.0.0",
+  "description": "A library for using Discord as a database.",
+  "license": "AGPL-3.0-or-later",
+  "author": {
+    "name": "TotoCodeFR",
+    "url": "https://github.com/TotoCodeFR"
+  },
+  "type": "module",
+  "main": "main.js",
+  "keywords": [
+    "discord",
+    "database",
+    "storage",
+    "crud",
+    "discord.js",
+    "nosql",
+    "channel-database",
+    "discord-storage"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TotoCodeFR/dibcord.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TotoCodeFR/dibcord/issues"
+  },
+  "homepage": "https://github.com/TotoCodeFR/dibcord#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "files": [
+    "main.js",
+    "README.md",
+    "package.json"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "discord.js": "^14.22.1"
+  }
+}
