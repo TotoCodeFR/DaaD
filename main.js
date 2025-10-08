@@ -1,7 +1,7 @@
 import { ChannelType, Client, Events, GatewayIntentBits } from "discord.js";
 
 class Bot {
-    constructor(bot_token, guild_id, category_name = 'Dibcord') {
+    constructor(bot_token, guild_id, category_name = 'DaaD') {
         this.guild_id = guild_id;
         this.guild = null;
         this.dbCategory = null;
