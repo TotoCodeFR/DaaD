@@ -73,24 +73,26 @@ await usersTable.delete('user123');
 
 ### Bot Class
 
-#### `new Bot(bot_token, guild_id)`
+#### `new Bot(bot_token, guild_id, category_name = 'Dibcord')`
 Creates a new bot instance.
 
 - `bot_token` (string): Your Discord bot token
 - `guild_id` (string): The Discord server ID where tables will be created
+- `category_name` (string, optional): The name of the category to store table channels in. Defaults to `'Dibcord'`.
 
 #### `bot.link_table(table)`
-Links a ChannelTable to the bot and initializes it.
+#### `bot.linkTable(table)`
+Links a `ChannelTable` to the bot and initializes it.
 
 - `table` (ChannelTable): The table instance to link
 
 ### ChannelTable Class
 
 #### `new ChannelTable(table_name, schema)`
-Creates a new table instance.
+Creates a new `ChannelTable` instance.
 
 - `table_name` (string): Name of the table (will be used as channel name)
-- `schema` (object): Table schema with `columns` array and `primary_key` string
+- `schema` (object): Table schema with a `columns` array and a `primaryKey` string.
 
 #### `table.insert(data)`
 Inserts a new record into the table.
@@ -102,7 +104,7 @@ Inserts a new record into the table.
 Finds a record by its primary key.
 
 - `primary_key_value`: The value of the primary key to search for
-- Returns: Promise resolving to `{data: object, messages: Map}` or `null`
+- Returns: Promise resolving to `{data: object, messages: Map<string, Message>}` or `null`
 
 #### `table.query(predicate)`
 Queries records using a predicate function.
@@ -139,7 +141,7 @@ Deletes a record from the table.
 
 Dibcord uses Discord channels as database tables:
 
-- Each table becomes a Discord channel under a "Dibcord" category
+- Each table becomes a Discord channel under a "Dibcord" or custom category
 - Records are stored as Discord messages with embedded JSON data
 - Large records are automatically chunked across multiple messages
 - Messages are linked together using footer references for data reconstruction
