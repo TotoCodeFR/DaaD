@@ -27,6 +27,8 @@ class Bot {
                     throw new Error("Could not find guild with ID " + this.guild_id)
                 }
 
+                await this.guild.channels.fetch();
+
                 let category = this.guild.channels.cache.find(
                     c => c.name === category_name && c.type === ChannelType.GuildCategory
                 );
