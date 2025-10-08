@@ -1,7 +1,7 @@
 import { ChannelType, Client, GatewayIntentBits } from "discord.js";
 
 class Bot {
-    constructor(bot_token, guild_id) {
+    constructor(bot_token, guild_id, category_name = 'Dibcord') {
         this.guild_id = guild_id;
         this.guild = null;
         this.dbCategory = null;
@@ -27,14 +27,13 @@ class Bot {
                     throw new Error("Could not find guild with ID " + this.guild_id)
                 }
 
-                const categoryName = 'Dibcord';
                 let category = this.guild.channels.cache.find(
-                    c => c.name === categoryName && c.type === ChannelType.GuildCategory
+                    c => c.name === category_name && c.type === ChannelType.GuildCategory
                 );
 
                 if (!category) {
                     category = await this.guild.channels.create({
-                        name: categoryName,
+                        name: category_name,
                         type: ChannelType.GuildCategory,
                         permissionOverwrites: [{
                             id: this.guild.roles.everyone,
