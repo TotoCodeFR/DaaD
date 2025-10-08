@@ -1,4 +1,4 @@
-import { ChannelType, Client, GatewayIntentBits } from "discord.js";
+import { ChannelType, Client, Events, GatewayIntentBits } from "discord.js";
 
 class Bot {
     constructor(bot_token, guild_id, category_name = 'Dibcord') {
@@ -20,11 +20,13 @@ class Bot {
 
         // A promise that resolves when the bot is ready and the guild is found
         this.ready = new Promise(resolve => {
-            this.client.once('clientReady', async () => {
+            this.client.once(Events.ClientReady, async () => {
                 try {
                     this.guild = await this.client.guilds.fetch(this.guild_id);
-                } catch {
-                    throw new Error("Could not find guild with ID " + this.guild_id)
+                    // Ensure the guild channels cache is populated
+                    await this.guild.channels.fetch();
+                } catch (error) {
+                    throw new Error("Could not find guild with ID " + this.guild_id + ": " + error.message);
                 }
 
                 let category = this.guild.channels.cache.find(
