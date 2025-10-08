@@ -73,24 +73,24 @@ await usersTable.delete('user123');
 
 ### Bot Class
 
-#### `new Bot(botToken, guildId)`
+#### `new Bot(bot_token, guild_id)`
 Creates a new bot instance.
 
-- `botToken` (string): Your Discord bot token
-- `guildId` (string): The Discord server ID where tables will be created
+- `bot_token` (string): Your Discord bot token
+- `guild_id` (string): The Discord server ID where tables will be created
 
-#### `bot.linkTable(table)`
+#### `bot.link_table(table)`
 Links a ChannelTable to the bot and initializes it.
 
 - `table` (ChannelTable): The table instance to link
 
 ### ChannelTable Class
 
-#### `new ChannelTable(tableName, schema)`
+#### `new ChannelTable(table_name, schema)`
 Creates a new table instance.
 
-- `tableName` (string): Name of the table (will be used as channel name)
-- `schema` (object): Table schema with `columns` array and `primaryKey` string
+- `table_name` (string): Name of the table (will be used as channel name)
+- `schema` (object): Table schema with `columns` array and `primary_key` string
 
 #### `table.insert(data)`
 Inserts a new record into the table.
@@ -98,10 +98,10 @@ Inserts a new record into the table.
 - `data` (object): The data object to insert (must include primary key)
 - Returns: Promise resolving to the created Discord message
 
-#### `table.find(primaryKeyValue)`
+#### `table.find(primary_key_value)`
 Finds a record by its primary key.
 
-- `primaryKeyValue`: The value of the primary key to search for
+- `primary_key_value`: The value of the primary key to search for
 - Returns: Promise resolving to `{data: object, messages: Map}` or `null`
 
 #### `table.query(predicate)`
@@ -110,16 +110,16 @@ Queries records using a predicate function.
 - `predicate` (function): Function that receives a data object and returns boolean
 - Returns: Promise resolving to an array of matching data objects
 
-#### `table.update(newData)`
+#### `table.update(new_data)`
 Updates an existing record.
 
-- `newData` (object): The complete new data object (must include primary key)
+- `new_data` (object): The complete new data object (must include primary key)
 - Returns: Promise resolving to the created Discord message
 
-#### `table.delete(primaryKeyValue)`
+#### `table.delete(primary_key_value)`
 Deletes a record from the table.
 
-- `primaryKeyValue`: The primary key value of the record to delete
+- `primary_key_value`: The primary key value of the record to delete
 - Returns: Promise resolving to boolean (true if successful)
 
 ## Setup Requirements
