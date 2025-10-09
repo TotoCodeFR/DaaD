@@ -366,14 +366,11 @@ class ChannelTable {
                 m.author.id === this.channel.client.user.id && m.content.includes('| Chunk 1 of')
             );
 
-            console.log(headMessages)
-
             // Reconstruct and cache each record found
             for (const headMessage of headMessages.values()) {
                 const record = await this._reconstructRecord(headMessage);
                 if (record && record.data[this.schema.primaryKey]) {
                     this.cache.set(record.data[this.schema.primaryKey], { message: headMessage, data: record.data });
-                    console.log(this.cache)
                 }
             }
         }
