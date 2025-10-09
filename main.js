@@ -94,6 +94,10 @@ class ChannelTable {
             throw new Error(`Data is missing primary key field: '${primaryKey}'`);
         }
 
+        if (this.cache.has(pkValue)) {
+            return this.cache.get(pkValue).message;
+        }
+
         const dataString = JSON.stringify(data);
         const chunks = this._chunkData(dataString, 3800); // Chunk to fit in embed description
 
@@ -323,6 +327,56 @@ class ChannelTable {
 
         this.channel = channel;
         this.channel_id = channel.id;
+
+        await this._refreshCache();
+
+        setInterval(async () => {
+            await this._refreshCache();
+        }, 60000)
+    }
+
+    /**
+     * (Internal) Refreshes the table's cache
+     * Called from _initialize
+    */
+    async _refreshCache() {
+        if (!this.channel) {
+            throw new Error(`Table "${this.table_name}" has not been initialized. Link it to the bot first.`);
+        }
+
+        this.cache.clear();
+        let lastId;
+
+        // Paginate through all messages in the channel
+        while (true) {
+            const options = { limit: 100 };
+            if (lastId) {
+                options.before = lastId;
+            }
+
+            const messages = await this.channel.messages.fetch(options);
+            if (messages.size === 0) {
+                break; // No more messages
+            }
+
+            lastId = messages.lastKey();
+
+            // Filter for head messages (chunk 1) from the bot
+            const headMessages = messages.filter(m =>
+                m.author.id === this.channel.client.user.id && m.content.includes('| Chunk 1 of')
+            );
+
+            console.log(headMessages)
+
+            // Reconstruct and cache each record found
+            for (const headMessage of headMessages.values()) {
+                const record = await this._reconstructRecord(headMessage);
+                if (record && record.data[this.schema.primaryKey]) {
+                    this.cache.set(record.data[this.schema.primaryKey], { message: headMessage, data: record.data });
+                    console.log(this.cache)
+                }
+            }
+        }
     }
 }
 
