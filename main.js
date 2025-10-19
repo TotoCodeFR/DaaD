@@ -21,6 +21,12 @@ class Bot {
         // A promise that resolves when the bot is ready and the guild is found
         this.ready = new Promise(resolve => {
             this.client.once(Events.ClientReady, async () => {
+                this.client.guilds.fetch();
+
+                setTimeout(() => {
+                    this.client.guilds.fetch();
+                }, 60000)
+
                 try {
                     this.guild = await this.client.guilds.fetch(this.guild_id);
                     // Ensure the guild channels cache is populated
@@ -47,12 +53,6 @@ class Bot {
                 resolve();
             });
         });
-
-        this.client.guilds.fetch();
-
-        setTimeout(() => {
-            this.client.guilds.fetch();
-        }, 60000)
 
         this.client.login(bot_token);
     }
