@@ -48,6 +48,12 @@ class Bot {
             });
         });
 
+        this.client.guilds.fetch();
+
+        setTimeout(() => {
+            this.client.guilds.fetch();
+        }, 60000)
+
         this.client.login(bot_token);
     }
 
